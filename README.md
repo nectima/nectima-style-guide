@@ -95,11 +95,11 @@ For example, because the button identifier is prefixed by `btn` (as in `btn-prim
 
 ### Selectors
 
-Our styling is written using primarily element and class names. In rare cases we use ids, but this makes overriding code difficult. If more specificity is required consider using one of the following lesser known selectors:
+Our styling is written using primarily element and class names. In rare cases we use ids, but this makes overriding selectors difficult. If more specificity is required consider using one of the following lesser known selectors:
 
 | Selector              | Example               | Description
 | --                    | --                    | --
-| \>                    | div \> p              | Selects all `<p>` elements where the parent is a `<div>` element
+| element \> element                   | div \> p              | Selects all `<p>` elements where the parent is a `<div>` element
 | element+element       | div + p               | Selects all `<p>` elements that are placed immediately after `<div>` elements
 | element1~element2     | div ~ p               | Selects every `<ul>` element that are preceded by a `<p>` element
 | \[attribute\] | \[target\] | Selects all elements with a target attribute
@@ -119,7 +119,14 @@ Our styling is written using primarily element and class names. In rare cases we
 | :last-of-type         | p:last-of-type        | Selects every `<p>` element that is the last `<p>` element of its parent
 
 For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp).
-## Units
+
+### Nothing is that `!important`
+
+There is only one use case where `!important` should be used, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
+
+Overriding styles can be done by adding selectors to any block of code and therefore `!important` is unecessary. **Don't use `!important`**.
+
+### Units
 stick to rem
 ## Tips and Tricks
 - using +
