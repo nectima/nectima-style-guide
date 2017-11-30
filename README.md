@@ -17,7 +17,7 @@ This repository is a reference for styling conventions and best practices used a
     - [IDE Extensions](#ide-extensions)
 1. [Implementation](#implementation)
     - [Libraries](#libraries)
-    - [Reusability v. Speed](#reusability-v.-speed)
+    - [Reusability v. Speed](#reusability-v-speed)
     - [Naming](#naming)
     - [!important](#!important)
     - [Units](#units)
