@@ -13,7 +13,6 @@ Styling complex projects is team effort that requires collaboration between mult
 
 This document serves as a guide to new developers (as well as a reference to all Nectima team members) of how we choose to implement styling in front-end projects. As in life, there are always exceptions to the rule, but by following these guidelines we can make reading and writing code easier, faster and more maintainable for everyone. We want to create applications that are both beautiful to look at and painless to scale. :heart:
 
----
 ## Tools
 ### SCSS
 
@@ -57,8 +56,9 @@ See an example of a design page with components [here](design-page.png).
 This workflow requires a little more time at the beginning of a project, but speeds up the process significantly later on. Plus having a dedicated page as a component reference enforces consistency and prevents developers from unecessarily restyling components.
 
 ### Naming
+Filenames should be in English and all (lowercase) kebab-case for all stylesheets (`my-style-sheet.scss`). If the stylesheet is intended to be used as a partial it should be prefixed by an underscore (`_partial-stylesheet.scss`).
 
-All class names should be in English and written in all (lowercase) kebab-case across the entire project. The only exception to this rule is when it is necessary to override existing styling by third-party libraries.
+All selector names should be in English and all (lowercase) kebab-case across the entire project. The only exception to this rule is when it is necessary to override existing styling by third-party libraries.
 
 ```css
 // GOOD
@@ -101,8 +101,8 @@ Our styling is written using primarily element and class names. In rare cases we
 | Selector              | Example               | Description
 | --                    | --                    | --
 | element \> element                   | div \> p              | Selects all `<p>` elements where the parent is a `<div>` element
-| element+element       | div + p               | Selects all `<p>` elements that are placed immediately after `<div>` elements
-| element1~element2     | div ~ p               | Selects every `<ul>` element that are preceded by a `<p>` element
+| element + element       | div + p               | Selects all `<p>` elements that are placed immediately after `<div>` elements
+| element1 ~ element2     | div ~ p               | Selects every `<ul>` element that are preceded by a `<p>` element
 | \[attribute\] | \[target\] | Selects all elements with a target attribute
 | \[attribute=value\] | \[target=_blank\] | Selects all elements with target="_blank"
 | \[attribute~=value\] | \[title~=flower\] | Selects all elements with a title attribute containing the word "flower"
@@ -123,17 +123,17 @@ For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/c
 
 ### Nothing is that `!important`
 
-There is only one use case where `!important` should be used, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
+There is only one use case where `!important` is necessary, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
 
 Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unecessary. **Don't use `!important`**.
 
 ### Units
 
-When at all possible avoid using `px` as a unit for `font-size`, `padding`, etc. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
+When working with font sizes, spacing and small increments in general prefer using `rem` to `px`. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
 
 ```css
 html {
-    font-size: 16px
+    font-size: 16px;
 }
 ```
 Then we can use this standard elsewhere:
@@ -144,6 +144,10 @@ Then we can use this standard elsewhere:
     margin-bottom: .75rem;  // 12px
 }
 ```
+
+However, `px` can be preferred for setting the width/height of bigger elements since the scale of `rem` can be hard to visualize and not all measurements will equal a multiple of `1rem`.
+
+Avoid leading zeros (i.e. write `0.75rem` as `.75rem`).
 
 ### Specificity v. Composability
 
@@ -185,6 +189,8 @@ Unfortunately most of our projects require legacy browser compatibility which me
 
 As a rule of thumb, we try to be compatiable with at least IE11, but this will vary depending on the project.
 
+Furthermore, browsers will have different names for the same property (`placeholder`, `scrollbar`, `transition`, etc). But in most cases we can handle this issue easily using compilation tools such as [autoprefixer](https://github.com/postcss/autoprefixer).
+
 ## Readability
 
 As mentioned in the introduction, our projects should be both visually pleasing, but also easy to scale. We're developing both for the finished project as well as for our colleauges and other developers, which means that we should always assume that someone else will have to one day read our code.
@@ -193,7 +199,7 @@ Examples of formatting which should be avoided include:
 
 1. One-liners
 ```css
-.class-name { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; ... 
+.btn, .header, h4 { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; }
 ```
 2. Overly abbreviated class names
 ```css
@@ -206,26 +212,50 @@ Examples of formatting which should be avoided include:
 .parent {
 padding: 1rem;
 .child
-    position: absolute;
+position: absolute;
 }
 ```
 
-## Comments and Labeling
+## Comments
 (todo)
 
 ## Directory Structure
-asdfasdasdf
+One of the many strengths of using Sass is that it allows us to break up our style sheets into smaller pages. These pages are usually grouped according to their scope (global, components, scope) or their purpose (variables, placeholders, mixins). For example a typical directory structure might look like the following:
 
+```
+styling
+|-- index.scss
+|-- components
+    |-- _buttons.scss
+    |-- _accordions.scss
+    |-- _modals.scss
+|-- pages
+    |-- _landing.scss
+    |-- _list-view.scss
+    |-- _profile.scss
+|-- foundation
+    |-- _base.scss
+    |-- _type.scss
+    |-- _variables.scss
+|-- utilities
+    |-- _mixins.scss
+    |-- _placeholders.scss
+    |-- _functions.scss
+```
+`index.scss` should in turn follow a similar structure when importing all the files:
 
+```scss
+// ==== COMPONENTS ====
+@import "./components/buttons";
+@import "./components/accordions";
+@import "./components/modals";
 
+// ====== PAGES =======
+@import "./pages/landing";
+@import "./pages/list-view";
 
-
-
-
-
-
-
-
+// ...
+```
 
 ### Contributors
 
