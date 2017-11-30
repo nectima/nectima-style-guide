@@ -50,7 +50,7 @@ The most common library used is Twitter's [Bootstrap](https://getbootstrap.com/)
 
 ### Reusability v. Speed
 
-All projects should start with an period of styling smaller reusable components rather than immediately focusing on developing screens. For example, add a simple design page and dedicate one or more days to writing and styling simple elements such as headers, buttons, form fields, containers, etc. This will allow you to implement styling in isolation from context and have a reference for elements and class names later in the development process. 
+All projects should start with an period of styling smaller reusable components rather than immediately focusing on developing screens. For example, add a simple design page and dedicate one or more days to writing and styling simple elements such as headers, buttons, form fields, containers, etc. This will allow you to implement styling in isolation from context and have a reference for elements and class names later in the development process.
 
 See an example of a design page with components [here](design-page.png).
 
@@ -93,6 +93,32 @@ For example, because the button identifier is prefixed by `btn` (as in `btn-prim
 }
 ```
 
+### Selectors
+
+Our styling is written using primarily element and class names. In rare cases we use ids, but this makes overriding code difficult. If more specificity is required consider using one of the following lesser known selectors:
+
+| Selector              | Example               | Description
+| --                    | --                    | --
+| \>                    | div \> p              | Selects all `<p>` elements where the parent is a `<div>` element
+| element+element       | div + p               | Selects all `<p>` elements that are placed immediately after `<div>` elements
+| element1~element2     | div ~ p               | Selects every `<ul>` element that are preceded by a `<p>` element
+| \[attribute\] | \[target\] | Selects all elements with a target attribute
+| \[attribute=value\] | \[target=_blank\] | Selects all elements with target="_blank"
+| \[attribute~=value\] | \[title~=flower\] | Selects all elements with a title attribute containing the word "flower"
+| \[attribute\|=value\] | \[lang\|=en\] | Selects all elements with a lang attribute value starting with "en"
+| \[attribute^=value\] |  a\[href^="https"\] | Selects every `<a>` element whose href attribute value begins with "https"
+| \[attribute$=value\] |  a\[href$=".pdf"\] | Selects every `<a>` element whose href attribute value ends with ".pdf"
+| \[attribute*=value\] |  a\[href*="w3schools"\] | Selects every `<a>` element whose href attribute value contains the substring "w3schools"
+| :first-child          | p:first-child         | Selects every `<p>` element that is the first child of its parent
+| :nth-child(n)         | p:nth-child(3)        | Selects every `<p>` element that is the third child of its parent
+| :nth-last-child(n)    | p:nth-last-child(2)   | Selects every `<p>` element that is the second to last child of its parent
+| :last-child           | p:last-child          | Selects every `<p>` element that is the last child of its parent
+| :first-of-type        | p:first-of-type       | Selects every `<p>` element that is the first `<p>` element of its parent
+| :nth-of-type(n)       | p:nth-of-type(2)      | Selects every `<p>` element that is the second `<p>` element of its parent
+| :nth-last-of-type(n)  | p:nth-last-of-type(3) | Selects every `<p>` element that is the third to last `<p>` element of its parent
+| :last-of-type         | p:last-of-type        | Selects every `<p>` element that is the last `<p>` element of its parent
+
+For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp).
 ## Units
 stick to rem
 ## Tips and Tricks
