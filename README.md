@@ -2,7 +2,7 @@
 
 This repository is a reference for styling conventions and best practices used at Nectima AB. 
 
-### Contributors
+#### Contributors
 
 - Axel Yung (Developer)
 - Nicolas Lindberg (UX Designer)
@@ -28,7 +28,7 @@ This repository is a reference for styling conventions and best practices used a
 
 ---
 
-## Introduction
+# Introduction
 
 Styling complex projects is team effort that requires collaboration between multiple designers and developers. Furthermore, many of Nectima's projects are later turned over to other development teams, which must continue or improve upon our own work. This only serves to emphasize the importance of a clean, systematic and structured approach to front-end development.
 
@@ -36,8 +36,9 @@ This document serves as a guide to new developers (as well as a reference to all
 
 ---
 
-## Tools
-#### SCSS
+# Tools
+
+## SCSS
 
 At Nectima most projects use [SCSS](http://sass-lang.com/) in lieu of simple CSS. SCSS is a superset of CSS which means that everything you know about CSS can still be applied in SCSS code, but this extension has powerful features which make the development process faster and easier.
 
@@ -49,28 +50,28 @@ If you are new to SCSS or need a review, checkout these resources:
 
 - [Learn the Best and Most Useful SCSS (Tutorial)](https://egghead.io/courses/learn-the-best-and-most-useful-scss)
 
-In any given project nearly all SCSS features are used, so it's important that you have a good understanding of the language.
+In any given project nearly all SCSS features are used, so it's important that you have a good understanding of the language and its features.
 
-### Compilers 
+## Compilers 
 (todo)
 
-### Linters
+## Linters
 (todo)
 
-### IDE Extensions
+## IDE Extensions
 (todo)
 
 ---
 
-## Implementation Guidelines
+# Implementation Guidelines
 
-### Using Libraries
+## Using Libraries
 
 Most projects have initial styling dependencies. In the best case, these third-party libraries also use Sass so that importing and extending them is easy and painless.
 
 The most common library used is Twitter's [Bootstrap](https://getbootstrap.com/).
 
-### Reusability v. Speed
+## Reusability v. Speed
 
 All projects should start with an period of styling smaller reusable components rather than immediately focusing on developing screens. For example, add a simple design page and dedicate one or more days to writing and styling simple elements such as headers, buttons, form fields, containers, etc. This will allow you to implement styling in isolation from context and have a reference for elements and class names later in the development process.
 
@@ -78,7 +79,38 @@ See an example of a design page with components [here](design-page.png).
 
 This workflow requires a little more time at the beginning of a project, but speeds up the process significantly later on. Plus having a dedicated page as a component reference enforces consistency and prevents developers from unecessarily restyling components.
 
-### Naming
+## Specificity v. Composability
+
+Strive to reuse classes as often as possible. This relates to the [Reusability v. Speed]() topic discussed earlier where reusable styles should be defined at the beginning of a project. If styles differ only slightly between components, consider composing styling from multiple classes rather than writing new classes. For example an element with `font-size: .75rem, font-weight: 600, text-decoration: underlined` can be styled with one class...
+
+```css
+.tiny-bold-underlined {
+    font-size: .75rem;
+    font-weight: 600;
+    text-decoration: underlined;
+}
+```
+
+...or three seperate ones...
+
+```css
+.tiny {
+    font-size: .75rem;
+}
+.bold {
+    font-weight: 600;
+}
+.underlined {
+    text-decoration: underlined;
+}
+```
+
+The advantage of the latter approach is that if it is necessary to style a text as bold and underlined later on, the developer only needs to add two classes to the markup without creating a new one.
+
+So before writing new classes, first consider if the same result can be achieved by composing styles from existing classes and when writing new classes try to consider writing them in a way which can be reused elsewhere.
+
+## Naming
+
 Filenames should be in English and all (lowercase) kebab-case for all stylesheets (`my-style-sheet.scss`). If the stylesheet is intended to be used as a partial it should be prefixed by an underscore (`_partial-stylesheet.scss`).
 
 All selector names should be in English and all (lowercase) kebab-case across the entire project. The only exception to this rule is when it is necessary to override existing styling by third-party libraries.
@@ -115,9 +147,50 @@ Because special button identifiers are prefixed by `btn` (as in `btn-primary` or
     ...
 }
 ```
+
 However, when using abbreviations consider readability over brevity. For example, very few could guess that `tp-hdr-lndg-pg` actually refers to "top header landing page."
 
-### Selectors
+## Directory Structure
+
+One of the many strengths of using Sass is that it allows us to break up our style sheets into smaller pages. These pages are usually grouped according to their scope (global, components, scope) or their purpose (variables, placeholders, mixins). For example a typical directory structure might look like the following:
+
+```
+styling
+|-- index.scss
+|-- components
+    |-- _buttons.scss
+    |-- _accordions.scss
+    |-- _modals.scss
+|-- pages
+    |-- _landing.scss
+    |-- _list-view.scss
+    |-- _profile.scss
+|-- foundation
+    |-- _base.scss
+    |-- _type.scss
+    |-- _variables.scss
+|-- utilities
+    |-- _mixins.scss
+    |-- _placeholders.scss
+    |-- _functions.scss
+```
+
+`index.scss` should in turn follow a similar structure when importing all the files:
+
+```scss
+// ==== COMPONENTS ====
+@import "./components/buttons";
+@import "./components/accordions";
+@import "./components/modals";
+
+// ====== PAGES =======
+@import "./pages/landing";
+@import "./pages/list-view";
+
+// ...
+```
+
+## Selectors
 
 Our styling is written using primarily element and class names. In rare cases we use ids, but this makes overriding selectors much more difficult. If more specificity is required consider using one of the following lesser known selectors:
 
@@ -144,13 +217,13 @@ Our styling is written using primarily element and class names. In rare cases we
 
 For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp).
 
-### Nothing is that `!important`
+## Nothing is that `!important`
 
 There is only one use case where `!important` is necessary, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
 
 Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unecessary. **Don't use `!important`**.
 
-### Units
+## Units
 
 When working with font sizes, spacing and small increments in general prefer using `rem` to `px`. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
 
@@ -172,35 +245,6 @@ However, `px` can be preferred for setting the width/height of bigger elements s
 
 Avoid leading zeros (i.e. write `0.75rem` as `.75rem`).
 
-### Specificity v. Composability
-
-Strive to reuse classes as often as possible. This relates to the [Reusability v. Speed]() topic discussed earlier where reusable styles should be defined at the beginning of a project. If styles differ only slightly between components, consider composing styling from multiple classes rather than writing new classes. For example an element with `font-size: .75rem, font-weight: 600, text-decoration: underlined` can be styled with one class...
-
-```css
-.tiny-bold-underlined {
-    font-size: .75rem;
-    font-weight: 600;
-    text-decoration: underlined;
-}
-```
-
-...or three seperate ones...
-
-```css
-.tiny {
-    font-size: .75rem;
-}
-.bold {
-    font-weight: 600;
-}
-.underlined {
-    text-decoration: underlined;
-}
-```
-
-The advantage of the latter approach is that if it is necessary to style a text as bold and underlined later on, the developer only needs to add two classes to the markup without creating a new one.
-
-So before writing new classes, first consider if the same result can be achieved by composing styles from existing classes and when writing new classes try to consider writing them in a way which can be reused elsewhere.
 
 ## Browser Compatability
 
@@ -241,41 +285,3 @@ position: absolute;
 
 ## Comments
 (todo)
-
-## Directory Structure
-One of the many strengths of using Sass is that it allows us to break up our style sheets into smaller pages. These pages are usually grouped according to their scope (global, components, scope) or their purpose (variables, placeholders, mixins). For example a typical directory structure might look like the following:
-
-```
-styling
-|-- index.scss
-|-- components
-    |-- _buttons.scss
-    |-- _accordions.scss
-    |-- _modals.scss
-|-- pages
-    |-- _landing.scss
-    |-- _list-view.scss
-    |-- _profile.scss
-|-- foundation
-    |-- _base.scss
-    |-- _type.scss
-    |-- _variables.scss
-|-- utilities
-    |-- _mixins.scss
-    |-- _placeholders.scss
-    |-- _functions.scss
-```
-`index.scss` should in turn follow a similar structure when importing all the files:
-
-```scss
-// ==== COMPONENTS ====
-@import "./components/buttons";
-@import "./components/accordions";
-@import "./components/modals";
-
-// ====== PAGES =======
-@import "./pages/landing";
-@import "./pages/list-view";
-
-// ...
-```
