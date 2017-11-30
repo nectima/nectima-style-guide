@@ -76,9 +76,9 @@ All class names should be in English and written in all (lowercase) kebab-case a
 }
 ```
 
-Try to extend upon existing class name conventions. If a class name uses an abbreviation it should be uniform across the project. For example **Bootstrap** uses `btn` as an abbreviation for "button." If you write a custom class name for a button element it should follow this convention as well. 
+Try to extend upon existing class name conventions. If a class name uses an abbreviation it should be uniform across the project. For example, **Bootstrap** uses `btn` as an abbreviation for "button." If you use **Bootstrap** in a project and write a custom class name for a button element it should follow this convention as well.
 
-For example, because the button identifier is prefixed by `btn` (as in `btn-primary` or `btn-sm`) you should do this:
+Because special button identifiers are prefixed by `btn` (as in `btn-primary` or `btn-sm`) you should do this:
 
 ```css
 // GOOD
@@ -92,10 +92,11 @@ For example, because the button identifier is prefixed by `btn` (as in `btn-prim
     ...
 }
 ```
+However, when using abbreviations consider readability over brevity. For example, very few could guess that `tp-hdr-lndg-pg` actually refers to "top header landing page."
 
 ### Selectors
 
-Our styling is written using primarily element and class names. In rare cases we use ids, but this makes overriding selectors difficult. If more specificity is required consider using one of the following lesser known selectors:
+Our styling is written using primarily element and class names. In rare cases we use ids, but this makes overriding selectors much more difficult. If more specificity is required consider using one of the following lesser known selectors:
 
 | Selector              | Example               | Description
 | --                    | --                    | --
@@ -124,17 +125,85 @@ For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/c
 
 There is only one use case where `!important` should be used, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
 
-Overriding styles can be done by adding selectors to any block of code and therefore `!important` is unecessary. **Don't use `!important`**.
+Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unecessary. **Don't use `!important`**.
 
 ### Units
-stick to rem
+
+When at all possible avoid using `px` as a unit for `font-size`, `padding`, etc. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
+
+```css
+html {
+    font-size: 16px
+}
+```
+Then we can use this standard elsewhere:
+```css
+.selector {
+    font-size: 1rem;        // 16px
+    padding: 1.5rem;        // 24px
+    margin-bottom: .75rem;  // 12px
+}
+```
+
+### Specificity v. Composability
+
+Strive to reuse classes as often as possible. This relates to the [Reusability v. Speed]() topic discussed earlier where reusable styles should be defined at the beginning of a project. If styles differ only slightly between components, consider composing styling from multiple classes rather than writing new classes. For example an element with `font-size: .75rem, font-weight: 600, text-decoration: underlined` can be styled with one class...
+
+```css
+.tiny-bold-underlined {
+    font-size: .75rem;
+    font-weight: 600;
+    text-decoration: underlined;
+}
+```
+
+...or three seperate ones...
+
+```css
+.tiny {
+    font-size: .75rem;
+}
+.bold {
+    font-weight: 600;
+}
+.underlined {
+    text-decoration: underlined;
+}
+```
+
+The advantage of the latter approach is that if it is necessary to style a text as bold and underlined later on, the developer only needs to add two classes to the markup without creating a new one.
+
+So before writing new classes, first consider if the same result can be achieved by composing styles from existing classes and when writing new classes try to consider writing them in a way which can be reused elsewhere.
+
+## Browser Compatability
+
+Unfortunately most of our projects require legacy browser compatibility which means that we are prohibited from using many modern CSS properties. These include...
+
+* `flex`
+* `object-fit`
+* `css-grid`
+
+As a rule of thumb, we try to be compatiable with at least IE11, but this will vary depending on the project.
+
+## Readability
+
+As mentioned in the introduction, our projects should be both visually pleasing, but also easy to scale. We're developing both for the finished project as well as for our colleauges and other developers, which means that we should always assume that someone else will have to one day read our code.
+
+Examples of formatting which should be avoided include:
+
+1. One-liners
+```css
+.class-name { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; }
+```
+2. Overly
+```css
+.class-name { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; }
+```
+
+## Comments and Labeling
 ## Tips and Tricks
 - using +
 - mixins
-## Comments and Labeling
-## Browser Compatability
-- no flex
-- no css grid
 ## Other
 - no !important
 
