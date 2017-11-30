@@ -37,7 +37,7 @@ This document serves as a guide to new developers (as well as a reference to all
 
 ---
 
-# Tools
+# Tools 
 
 ## SCSS
 
@@ -66,21 +66,58 @@ In any given project nearly all SCSS features are used, so it's important that y
 
 ## Libraries
 
-Most projects witll have third-party dependencies. In the best case, these libraries also use Sass so that importing and extending them is easy and painless.
+Most projects will have third-party dependencies. In the best case, these libraries also use Sass so that importing and extending them is easy and painless.
 
-The most common library used is Twitter's [Bootstrap](https://getbootstrap.com/).
+The most common library used is Twitter's [Bootstrap](https://getbootstrap.com/). Thankfully, the Bootstrap team have adopted Scss in the project and allow for overriding default colors, sizes and breakpoints.
+
+Before adopting a third-party library for the project that you are currently working on, consider how it will affect the project's backlog. Your teammates will thank you. 
 
 ## Reusability v. Speed
 
-All projects should start with an period of styling smaller reusable components rather than immediately focusing on developing screens. For example, add a simple design page and dedicate one or more days to writing and styling simple elements such as headers, buttons, form fields, containers, etc. This will allow you to implement styling in isolation from context and have a reference for elements and class names later in the development process.
+All projects should start with a period of styling smaller reusable components rather than immediately focusing on developing screens. For example, add a simple design page and dedicate one or more days to writing and styling simple elements such as headers, buttons, form fields, containers, etc. This will allow you to implement styling in isolation from context and have a reference for elements and class names later in the development process.
 
 See an example of a design page with components [here](design-page.png).
 
-This workflow requires a little more time at the beginning of a project, but speeds up the process significantly later on. Plus having a dedicated page as a component reference enforces consistency and prevents developers from unecessarily restyling components.
+This workflow requires a little more time at the beginning of a project, but speeds up the process significantly later on. Plus having a dedicated page as a component reference enforces consistency and prevents developers from unnecessarily  restyling components.
+
+### Using &
+In Scss the `&` operator is an extremely powerful tool and can help to make code much easier to maintain. For example, instead of writing... 
+```css
+.btn-blue {
+    display: inline-block;
+    font-size: 1.125rem;
+    width: 6rem;
+    background: blue;
+}
+.btn-red {
+    display: inline-block;
+    font-size: 1.125rem;
+    width: 6rem;
+    background: blue;
+}
+```
+...the `&` operator allows us to write...
+```scss
+.btn {
+    &-blue,
+    &-red {
+        display: inline-block;
+        font-size: 1.125rem;
+        width: 6rem;
+    }
+    &-blue {
+        background: blue;
+    }
+    &-red {
+        background: red;
+    }
+}
+```
+This way if we ever need to change a property across all components of a particular type we only need to edit the code in a single place. There are however other alternatives to this approach include using `%placeholders` and `@mixins`.
 
 ## Specificity v. Composability
 
-Strive to reuse classes as often as possible. This relates to the [Reusability v. Speed]() topic discussed earlier where reusable styles should be defined at the beginning of a project. If styles differ only slightly between components, consider composing styling from multiple classes rather than writing new classes. For example an element with `font-size: .75rem, font-weight: 600, text-decoration: underlined` can be styled with one class...
+Strive to reuse classes as often as possible. This relates to the [Reusability v. Speed]() topic discussed earlier where reusable styles should be defined at the beginning of a project. If styles differ only slightly between components, consider composing styling from multiple classes rather than writing new classes. For example, an element with `font-size: .75rem, font-weight: 600, text-decoration: underlined` can be styled with one class...
 
 ```css
 .tiny-bold-underlined {
@@ -90,7 +127,7 @@ Strive to reuse classes as often as possible. This relates to the [Reusability v
 }
 ```
 
-...or three seperate ones...
+...or three separate ones...
 
 ```css
 .tiny {
@@ -219,13 +256,13 @@ Our styling is written using primarily element and class names. In rare cases we
 
 For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp).
 
-## Nothing is that `!important`
+## Nothing is that `!important` :hankey:
 
 There is only one use case where `!important` is necessary, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
 
-Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unecessary. **Don't use `!important`**.
+Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unnecessary. **Don't use `!important`**. 
 
-## Units
+## Units 
 
 When working with font sizes, spacing and small increments in general prefer using `rem` to `px`. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
 
@@ -248,7 +285,7 @@ However, `px` can be preferred for setting the width/height of bigger elements s
 Avoid leading zeros (i.e. write `0.75rem` as `.75rem`).
 
 
-## Browser Compatability
+## Browser Compatibility
 
 Unfortunately most of our projects require legacy browser compatibility which means that we are prohibited from using many modern CSS properties. These include...
 
@@ -256,13 +293,13 @@ Unfortunately most of our projects require legacy browser compatibility which me
 * `object-fit`
 * `css-grid`
 
-As a rule of thumb, we try to be compatiable with at least IE11, but this will vary depending on the project.
+As a rule of thumb, we try to be compatibile with at least IE11, but this will vary depending on the project.
 
 Furthermore, browsers will have different names for the same property (`placeholder`, `scrollbar`, `transition`, etc). But in most cases we can handle this issue easily using compilation tools such as [autoprefixer](https://github.com/postcss/autoprefixer).
 
 ## Readability
 
-As mentioned in the introduction, our projects should be both visually pleasing, but also easy to scale. We're developing both for the finished project as well as for our colleauges and other developers, which means that we should always assume that someone else will have to one day read our code.
+As mentioned in the introduction, our projects should be both visually pleasing, but also easy to scale. We're developing both for the finished project as well as for our colleagues and other developers, which means that we should always assume that someone else will have to one day read our code.
 
 Examples of formatting which should be avoided include:
 
