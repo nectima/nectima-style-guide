@@ -18,13 +18,14 @@ This repository is a reference for styling conventions and best practices used a
 1. [Implementation](#implementation)
     - [Libraries](#libraries)
     - [Reusability v. Speed](#reusability-v-speed)
+    - [Specificity v. Composability](#specificity-v-composability)
     - [Naming](#naming)
-    - [!important](#!important)
-    - [Units](#units)
-    - [Specificity v. Composability](#specificity-v.-composability)
-    - [Readability](#readability)
-    - [Commenting](#commenting)
     - [Directory Structure](#directory-structure)
+    - [Selectorsd](#selectors)
+    - [!important](#nothing-is-that-important)
+    - [Units](#units)
+    - [Readability](#readability)
+    - [Comments](#comments)
 
 ---
 
@@ -109,8 +110,11 @@ So before writing new classes, first consider if the same result can be achieved
 
 ## Naming
 
+#### Filenames
+
 Filenames should be in English and all (lowercase) kebab-case for all stylesheets (`my-style-sheet.scss`). If the stylesheet is intended to be used as a partial it should be prefixed by an underscore (`_partial-stylesheet.scss`).
 
+#### Selector Names
 All selector names should be in English and all (lowercase) kebab-case across the entire project. The only exception to this rule is when it is necessary to override existing styling by third-party libraries.
 
 ```css
