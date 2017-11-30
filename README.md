@@ -40,7 +40,7 @@ This document serves as a guide to new developers (as well as a reference to all
 
 # Tools :hammer_and_wrench:
 
-## SCSS :sparkling_heart:
+## SCSS
 
 At Nectima most projects use [SCSS](http://sass-lang.com/) in lieu of simple CSS. SCSS is a superset of CSS which means that everything you know about CSS can still be applied in SCSS code, but this extension has powerful features which make the development process faster and easier.
 
@@ -52,13 +52,13 @@ If you are new to SCSS or need a review, checkout these resources:
 
 In any given project nearly all SCSS features are used, so it's important that you have a good understanding of the language and its features.
 
-## Compilers :factory:
+## Compilers
 (todo)
 
 ## Linters
 (todo)
 
-## IDE Extensions :compression:
+## IDE Extensions
 (todo)
 
 ---
@@ -146,7 +146,7 @@ The advantage of the latter approach is that if it is necessary to style a text 
 
 So before writing new classes, first consider if the same result can be achieved by composing styles from existing classes and when writing new classes try to consider writing them in a way which can be reused elsewhere.
 
-## Naming :thinking_face:
+## Naming :neckbeard:
 
 #### Filenames :file_folder:
 
