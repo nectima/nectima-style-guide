@@ -2,10 +2,31 @@
 
 This repository is a reference for styling conventions and best practices used at Nectima AB. 
 
+### Contributors
+
+- Axel Yung (Developer)
+- Nicolas Lindberg (UX Designer)
+
 ## Table of Contents
 
-- [Introduction](#introduction)
-- []
+1. [Introduction](#introduction)
+1. [Tools](#introduction)
+    - [SCSS](#introduction)
+    - [Compilers](#introduction)
+    - [Linters](#introduction)
+    - [IDE Extentions](#introduction)
+1. [Implementation Guidelines](#introduction)
+    - [Libraries](#introduction)
+    - [Reusability v. Speed](#introduction)
+    - [Naming](#introduction)
+    - [!important](#introduction)
+    - [Units](#introduction)
+    - [Specificity v. Composability](#introduction)
+    - [Readability](#introduction)
+    - [Commenting](#introduction)
+    - [Directory Structure](#introduction)
+
+---
 
 ## Introduction
 
@@ -13,12 +34,14 @@ Styling complex projects is team effort that requires collaboration between mult
 
 This document serves as a guide to new developers (as well as a reference to all Nectima team members) of how we choose to implement styling in front-end projects. As in life, there are always exceptions to the rule, but by following these guidelines we can make reading and writing code easier, faster and more maintainable for everyone. We want to create applications that are both beautiful to look at and painless to scale. :heart:
 
+---
+
 ## Tools
-### SCSS
+#### SCSS
 
 At Nectima most projects use [SCSS](http://sass-lang.com/) in lieu of simple CSS. SCSS is a superset of CSS which means that everything you know about CSS can still be applied in SCSS code, but this extension has powerful features which make the development process faster and easier.
 
-If you are new to SASS or need a review, checkout these resources:
+If you are new to SCSS or need a review, checkout these resources:
 
 - [Sass Basics](http://sass-lang.com/guide)
 
@@ -256,7 +279,3 @@ styling
 
 // ...
 ```
-
-### Contributors
-
-Axel Yung (Developer)
