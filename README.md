@@ -27,8 +27,6 @@ If you are new to SASS or need a review, checkout these resources:
 
 - [Learn the Best and Most Useful SCSS (Tutorial)](https://egghead.io/courses/learn-the-best-and-most-useful-scss)
 
-- [Official SASS Documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
-
 In any given project nearly all SCSS features are used, so it's important that you have a good understanding of the language.
 
 ### Compilers 
@@ -51,9 +49,14 @@ Most projects have initial styling dependencies. In the best case, these third-p
 The most common library used is Twitter's [Bootstrap](https://getbootstrap.com/).
 
 ### Reusability v. Speed
-(todo)
 
-### Naming 
+All projects should start with an period of styling smaller reusable components rather than immediately focusing on developing screens. For example, add a simple design page and dedicate one or more days to writing and styling simple elements such as headers, buttons, form fields, containers, etc. This will allow you to implement styling in isolation from context and have a reference for elements and class names later in the development process. 
+
+See an example of a design page with components [here](design-page.png).
+
+This workflow requires a little more time at the beginning of a project, but speeds up the process significantly later on. Plus having a dedicated page as a component reference enforces consistency and prevents developers from unecessarily restyling components.
+
+### Naming
 
 All class names should be in English and written in all (lowercase) kebab-case across the entire project. The only exception to this rule is when it is necessary to override existing styling by third-party libraries.
 
@@ -89,3 +92,33 @@ For example, because the button identifier is prefixed by `btn` (as in `btn-prim
     ...
 }
 ```
+
+## Units
+stick to rem
+## Tips and Tricks
+- using +
+- mixins
+## Comments and Labeling
+## Browser Compatability
+- no flex
+- no css grid
+## Other
+- no !important
+
+## Directory Structure
+asdfasdasdf
+
+
+
+
+
+
+
+
+
+
+
+
+### Contributors
+
+Axel Yung (Developer)
