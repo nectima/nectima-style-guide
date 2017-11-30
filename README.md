@@ -25,6 +25,7 @@ This repository is a reference for styling conventions and best practices used a
     - [!important](#nothing-is-that-important)
     - [Units](#units)
     - [Directory Structure](#directory-structure)
+    - [Browser Compatibility :computer:](#browser-compatibility)
     - [Readability](#readability)
     - [Comments](#comments)
 
@@ -216,6 +217,36 @@ Our styling is written using primarily element and class names. In rare cases we
 | :last-of-type         | p:last-of-type        | Selects every `<p>` element that is the last `<p>` element of its parent
 
 For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp).
+## Pseudo Elements (Less is more)
+(todo)
+
+## Nothing is that `!important` :hankey:
+
+There is only one use case where `!important` is necessary, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
+
+Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unnecessary. **Don't use `!important`**. 
+
+## Units :straight_ruler: 
+
+When working with font sizes, spacing and small increments in general prefer using `rem` to `px`. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
+
+```css
+html {
+    font-size: 16px;
+}
+```
+Then we can use this standard elsewhere:
+```css
+.selector {
+    font-size: 1rem;        // 16px
+    padding: 1.5rem;        // 24px
+    margin-bottom: .75rem;  // 12px
+}
+```
+
+However, `px` can be preferred for setting the width/height of bigger elements since the scale of `rem` can be hard to visualize and not all measurements will equal a multiple of `1rem`.
+
+Avoid leading zeros (i.e. write `0.75rem` as `.75rem`).
 
 ## Directory Structure :file_cabinet:
 
@@ -257,41 +288,13 @@ styling
 // ...
 ```
 
-## Nothing is that `!important` :hankey:
-
-There is only one use case where `!important` is necessary, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
-
-Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unnecessary. **Don't use `!important`**. 
-
-## Units :straight_ruler: 
-
-When working with font sizes, spacing and small increments in general prefer using `rem` to `px`. Using `rem` is preferable since it is relative to the root element (or `<html>`). For example, if we want the default font-size to be `16px` across the entire project:
-
-```css
-html {
-    font-size: 16px;
-}
-```
-Then we can use this standard elsewhere:
-```css
-.selector {
-    font-size: 1rem;        // 16px
-    padding: 1.5rem;        // 24px
-    margin-bottom: .75rem;  // 12px
-}
-```
-
-However, `px` can be preferred for setting the width/height of bigger elements since the scale of `rem` can be hard to visualize and not all measurements will equal a multiple of `1rem`.
-
-Avoid leading zeros (i.e. write `0.75rem` as `.75rem`).
-
 ## Browser Compatibility :computer:
 
 Unfortunately most of our projects require legacy browser compatibility which means that we are prohibited from using many modern CSS properties. These include...
 
-* `flex`
-* `object-fit`
-* `css-grid`
+*`flex`
+*`object-fit`
+*`css-grid`
 
 As a rule of thumb, we try to be compatibile with at least IE11, but this will vary depending on the project.
 
