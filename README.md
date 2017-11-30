@@ -193,19 +193,25 @@ Examples of formatting which should be avoided include:
 
 1. One-liners
 ```css
-.class-name { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; }
+.class-name { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; ... 
 ```
-2. Overly
+2. Overly abbreviated class names
 ```css
-.class-name { font-size: $p-size; color: $text-color; border: 1px solid $brand-secondary; }
+.spr-abbr-clss-nm {  // what does this refer to?
+    ...
+}
+```
+3. Lazy indentation
+```css
+.parent {
+padding: 1rem;
+.child
+    position: absolute;
+}
 ```
 
 ## Comments and Labeling
-## Tips and Tricks
-- using +
-- mixins
-## Other
-- no !important
+(todo)
 
 ## Directory Structure
 asdfasdasdf
