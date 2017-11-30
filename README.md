@@ -10,21 +10,21 @@ This repository is a reference for styling conventions and best practices used a
 ## Table of Contents
 
 1. [Introduction](#introduction)
-1. [Tools](#introduction)
-    - [SCSS](#introduction)
-    - [Compilers](#introduction)
-    - [Linters](#introduction)
-    - [IDE Extentions](#introduction)
-1. [Implementation Guidelines](#introduction)
-    - [Libraries](#introduction)
-    - [Reusability v. Speed](#introduction)
-    - [Naming](#introduction)
-    - [!important](#introduction)
-    - [Units](#introduction)
-    - [Specificity v. Composability](#introduction)
-    - [Readability](#introduction)
-    - [Commenting](#introduction)
-    - [Directory Structure](#introduction)
+1. [Tools](#tools)
+    - [SCSS](#scss)
+    - [Compilers](#compilers)
+    - [Linters](#linters)
+    - [IDE Extensions](#ide-extensions)
+1. [Implementation](#implementation)
+    - [Libraries](#libraries)
+    - [Reusability v. Speed](#reusability-v.-speed)
+    - [Naming](#naming)
+    - [!important](#!important)
+    - [Units](#units)
+    - [Specificity v. Composability](#specificity-v.-composability)
+    - [Readability](#readability)
+    - [Commenting](#commenting)
+    - [Directory Structure](#directory-structure)
 
 ---
 
@@ -45,9 +45,7 @@ At Nectima most projects use [SCSS](http://sass-lang.com/) in lieu of simple CSS
 If you are new to SCSS or need a review, checkout these resources:
 
 - [Sass Basics](http://sass-lang.com/guide)
-
 - [Learn Sass In 15 Minutes (Tutorial)](https://tutorialzine.com/2016/01/learn-sass-in-15-minutes)
-
 - [Learn the Best and Most Useful SCSS (Tutorial)](https://egghead.io/courses/learn-the-best-and-most-useful-scss)
 
 In any given project nearly all SCSS features are used, so it's important that you have a good understanding of the language and its features.
@@ -63,11 +61,11 @@ In any given project nearly all SCSS features are used, so it's important that y
 
 ---
 
-# Implementation Guidelines
+# Implementation
 
-## Using Libraries
+## Libraries
 
-Most projects have initial styling dependencies. In the best case, these third-party libraries also use Sass so that importing and extending them is easy and painless.
+Most projects witll have third-party dependencies. In the best case, these libraries also use Sass so that importing and extending them is easy and painless.
 
 The most common library used is Twitter's [Bootstrap](https://getbootstrap.com/).
 
