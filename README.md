@@ -25,7 +25,7 @@ This repository is a reference for styling conventions and best practices used a
     - [!important](#nothing-is-that-important)
     - [Units](#units)
     - [Directory Structure](#directory-structure)
-    - [Browser Compatibility :computer:](#browser-compatibility)
+    - [Browser Compatibility](#browser-compatibility)
     - [Readability](#readability)
     - [Comments](#comments)
 
