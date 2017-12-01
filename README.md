@@ -9,8 +9,8 @@ This repository is a reference for styling conventions and best practices used a
 
 ## Table of Contents
 
-1. [Introduction :heart:](#introduction)
-1. [Tools :hammer_and_wrench:](#tools)
+1. [Introduction](#introduction)
+1. [Tools](#tools)
     - [SCSS](#scss)
     - [Compilers](#compilers)
     - [Linters](#linters)
@@ -217,14 +217,66 @@ Our styling is written using primarily element and class names. In rare cases we
 | :last-of-type         | p:last-of-type        | Selects every `<p>` element that is the last `<p>` element of its parent
 
 For a complete reference look to [W3 Schools](https://www.w3schools.com/cssref/css_selectors.asp).
-## Pseudo Elements (Less is more)
-(todo)
+
+## Pseudo Elements
+When it comes to writing markup, **less is more**. For this reason we encourage using pseudo elements (`::before` and `::after`) over writing unecessary empty markup. Candidates for pseudo elements include basic shapes, lines, background images and other elements whose contents are static.
+
+For example, consider the following scenario. We want to add a basic circle shape to sit behind a `<svg>` icon:
+
+![pseudo-element-candidate](pseudo-element-candidate.png)
+
+We could use an empty `html` element and position it absolutely inside of a container that it shares with the `svg` element:
+
+```html
+<div class="icon-container">
+    <svg class="icon"></svg>
+    <div class="icon-background"></div>
+<div>
+```
+
+```scss
+.icon-container {
+    position: relative;
+    .icon-background {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 1.25rem;
+        background: $faint-orange;
+    }
+}
+```
+
+But we can achieve the same result by using a pseudo element on `<svg>` :
+
+```html
+<svg class="icon"></svg>
+```
+
+```scss
+.icon {
+    position: relative;
+    &::after{
+        display: block;
+        content: "";
+        // same as above
+        position: absolute;
+        top: 50%;
+        ...
+    }
+}
+```
+
+The second solution is preferable here, because it removes the need for marking up the container and the extra empty element. As an added bonus we can reuse the `icon` class whenever we need the same circle background by simply adding an additional class. Nice!
 
 ## Nothing is that `!important` :hankey:
 
 There is only one use case where `!important` is necessary, namely overriding inline styles set dynamically. This is usually a result of a third-party javascript library which dynamically sets inline styles as part of its functionality.
 
-Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unnecessary. **Don't use `!important`**. 
+Overriding styles can be done by adding additional selectors to any block of code and therefore `!important` is unnecessary. **Don't use `!important`**.
 
 ## Units :straight_ruler: 
 
