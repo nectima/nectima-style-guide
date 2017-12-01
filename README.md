@@ -95,7 +95,7 @@ In Scss the `&` operator is an extremely powerful tool and can help to make code
     display: inline-block;
     font-size: 1.125rem;
     width: 6rem;
-    background: blue;
+    background: red;
 }
 ```
 ...the `&` operator allows us to write...
@@ -259,7 +259,7 @@ But we can achieve the same result by using a pseudo element on `<svg>` :
 ```scss
 .icon {
     position: relative;
-    &::after{
+    &::after {
         display: block;
         content: "";
         // same as above
@@ -372,8 +372,9 @@ Examples of formatting which should be avoided include:
 ```css
 .parent {
 padding: 1rem;
-.child
+.child {
 position: absolute;
+}
 }
 ```
 
