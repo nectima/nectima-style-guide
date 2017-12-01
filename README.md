@@ -9,8 +9,8 @@ This repository is a reference for styling conventions and best practices used a
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-1. [Tools](#tools)
+1. [Introduction :heart:](#introduction)
+1. [Tools :hammer_and_wrench:](#tools)
     - [SCSS](#scss)
     - [Compilers](#compilers)
     - [Linters](#linters)
@@ -292,9 +292,9 @@ styling
 
 Unfortunately most of our projects require legacy browser compatibility which means that we are prohibited from using many modern CSS properties. These include...
 
-*`flex`
-*`object-fit`
-*`css-grid`
+* `flex`
+* `object-fit`
+* `css-grid`
 
 As a rule of thumb, we try to be compatibile with at least IE11, but this will vary depending on the project.
 
