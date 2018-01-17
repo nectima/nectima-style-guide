@@ -237,6 +237,7 @@ We could use an empty `html` element and position it absolutely inside of a cont
 ```scss
 .icon-container {
     position: relative;
+    
     .icon-background {
         position: absolute;
         top: 50%;
@@ -259,6 +260,7 @@ But we can achieve the same result by using a pseudo element on `<svg>` :
 ```scss
 .icon {
     position: relative;
+    
     &::after {
         display: block;
         content: "";
